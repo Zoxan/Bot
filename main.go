@@ -11,5 +11,5 @@ func main() {
 }
 
 func handleRoot(w http.ResponseWriter, req *http.Request) {
-	fmt.Fprintf(w, "Hello! (github)")
+	fmt.Fprintf(w, "Hello! (github v2)")
 }
