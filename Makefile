@@ -1,5 +1,5 @@
 run:
-	go run main.go
+	go run ./main
 
 bench:
 	go test -bench=. main
