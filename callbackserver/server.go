@@ -35,9 +35,9 @@ var (
 )
 
 //Start ..
-func Start(confToken string, port string) {
+func Start(confToken string, port string, bot *bot.Bot) {
 	confirmationToken = confToken
-	botInstance = bot.NewBot()
+	botInstance = bot
 	listenAndHandle(port)
 }
 

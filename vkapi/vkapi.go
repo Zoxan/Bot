@@ -33,8 +33,8 @@ type UsersResponse struct {
 var errNoUsers = errors.New("no users")
 var accessToken string
 
-//Start ..
-func Start(accToken string) {
+//Init ..
+func Init(accToken string) {
 	accessToken = accToken
 }
 

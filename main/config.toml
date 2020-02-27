@@ -1,3 +1,9 @@
-access_token = ""
-confirmation_token = ""
+vk_access_token = ""
+vk_confirmation_token = ""
+yandex_weather_token = ""
+yandex_tariff = "test" #test | weather_on_site - yandex weather tariff
+bot_weather_targets = [
+    { caption = "Москва", latitude =  55.75222, longitude = 37.61556 },
+    { caption = "Санкт-Петербург", latitude =  59.93863, longitude = 30.31413 }
+]
 port = ":80"

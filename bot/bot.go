@@ -2,6 +2,7 @@ package bot
 
 import (
 	"fmt"
+	"github.com/Zoxan/bot/yandexweather"
 	"log"
 	"math/rand"
 	"strings"
@@ -15,15 +16,23 @@ type Bot struct {
 	botAppeal  string
 	helloCmd   string
 	weatherCmd string
+	weatherParams []WeatherParam
+}
+
+type WeatherParam struct {
+	Caption   string
+	Latitude  float64
+	Longitude float64
 }
 
 //NewBot ..
-func NewBot() *Bot {
+func NewBot(weatherParams []WeatherParam) *Bot {
 	rand.Seed(time.Now().UTC().UnixNano())
 	return &Bot{
-		botAppeal:  "бот,",
+		botAppeal:  "бот",
 		helloCmd:   "привет",
 		weatherCmd: "погода",
+		weatherParams: weatherParams,
 	}
 }
 
@@ -58,7 +67,13 @@ func (bot *Bot) execHello(fromID int, peerID int) {
 }
 
 func (bot *Bot) execWeather(peerID int) {
-	err := vkapi.RequestSendToGroup(peerID, getRandromID(), "погода отличная!")
+	message := ""
+	for _, param := range bot.weatherParams {
+		res, _ := yandexweather.GetWeatherText(param.Latitude, param.Longitude)
+		message += fmt.Sprintf("%s: %s\n", param.Caption, res)
+	}
+
+	err := vkapi.RequestSendToGroup(peerID, getRandromID(), message)
 	if err != nil {
 		log.Print("ERROR request send to group:", err)
 	}
